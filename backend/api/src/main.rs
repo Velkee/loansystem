@@ -6,7 +6,10 @@ fn main() {
     use self::schema::devices::dsl::*;
 
     let connection = &mut establish_connection();
-    let results = devices.select(Device::as_select()).load(connection).expect("Error loading devices");
+    let results = devices
+        .select(Device::as_select())
+        .load(connection)
+        .expect("Error loading devices");
 
     for device in results {
         println!("{}", device.id);

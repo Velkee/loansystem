@@ -9,9 +9,6 @@ edition = "2021"
 diesel = { version = "2.1.4", features = ["postgres"] }
 dotenvy = "0.15.7"
 
-[[bin]]
-name = "select"
-
 [profile.release]
 codegen-units = 1
 lto = "fat"
