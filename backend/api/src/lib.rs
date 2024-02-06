@@ -3,16 +3,17 @@ pub mod schema;
 
 use diesel::deserialize::{FromSql, FromSqlRow};
 use diesel::expression::AsExpression;
-use diesel::pg::{Pg, PgConnection};
-use diesel::prelude::*;
+use diesel::pg::Pg;
 use diesel::serialize::{IsNull, ToSql};
+use diesel_async::{AsyncConnection, AsyncPgConnection};
 use dotenvy::dotenv;
 use schema::sql_types::StatusEnum;
+use serde::{Deserialize, Serialize};
 use std::env;
 use std::fmt::Display;
 use std::io::Write;
 
-#[derive(Debug, PartialEq, FromSqlRow, AsExpression, Eq)]
+#[derive(Debug, PartialEq, FromSqlRow, AsExpression, Eq, Deserialize, Serialize)]
 #[diesel(sql_type = StatusEnum)]
 pub enum Status {
     InUse,
@@ -97,10 +98,11 @@ impl FromSql<StatusEnum, Pg> for Status {
     }
 }
 
-pub fn establish_connection() -> PgConnection {
+pub async fn establish_connection() -> AsyncPgConnection {
     dotenv().ok();
 
     let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
-    PgConnection::establish(&database_url)
+    AsyncPgConnection::establish(&database_url)
+        .await
         .unwrap_or_else(|_| panic!("Error connecting to {}", database_url))
 }
