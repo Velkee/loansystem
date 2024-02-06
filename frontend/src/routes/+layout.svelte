@@ -6,7 +6,7 @@
 <AppShell slotSidebarLeft="bg-surface-500/50 w-56 p-4">
 	<svelte:fragment slot="sidebarLeft">
 		<nav class="list-nav">
-					<Accordion>
+					<Accordion data-sveltekit-preload-data="tap">
 						<AccordionItem>
 							<svelte:fragment slot="summary">Devices</svelte:fragment>
 							<svelte:fragment slot="content">
