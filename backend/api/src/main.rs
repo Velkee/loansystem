@@ -20,9 +20,29 @@ async fn list_devices() -> impl Responder {
     HttpResponse::Ok().json(results)
 }
 
+#[get("/categories")]
+async fn list_categories() -> impl Responder {
+    use self::schema::categories::dsl::*;
+
+    let connection = &mut establish_connection().await;
+    let results: Vec<Category> = match categories
+        .select(Category::as_select())
+        .load(connection)
+        .await
+    {
+        Ok(results) => results,
+        Err(_) => {
+            return HttpResponse::InternalServerError()
+                .body("500: Internal server error\nDatabase unavailable or broken.")
+        }
+    };
+
+    HttpResponse::Ok().json(results)
+}
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(list_devices))
+    HttpServer::new(|| App::new().service(list_devices).service(list_categories))
         .bind(("127.0.0.1", 8000))?
         .run()
         .await
