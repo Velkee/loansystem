@@ -75,7 +75,7 @@
 		<label class="label">
 			<span>Person</span>
 			<input
-				class="input"
+				class="input rounded-lg"
 				type="search"
 				name="user"
 				bind:value={userInput}
