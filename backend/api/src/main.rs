@@ -5,8 +5,7 @@ use diesel_async::RunQueryDsl;
 use loansystem_backend::*;
 
 async fn internal_error() -> HttpResponse {
-    HttpResponse::InternalServerError()
-        .body("500: Internal server error\nDatabase unavailable or broken.")
+    HttpResponse::InternalServerError().body("")
 }
 
 #[get("/devices")]

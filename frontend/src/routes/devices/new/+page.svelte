@@ -73,7 +73,7 @@
 		<br />
 
 		<label class="label">
-			<span>Person</span>
+			<span>Person*</span>
 			<input
 				class="input rounded-lg"
 				type="search"

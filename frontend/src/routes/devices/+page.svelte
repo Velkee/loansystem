@@ -2,11 +2,31 @@
 	import { AppBar, Table, tableMapperValues } from '@skeletonlabs/skeleton';
 	import type { TableSource } from '@skeletonlabs/skeleton';
 
-	const testData = [{ id: 1, serialnum: 69420, category: 'Thing' }];
+	export let data;
 
 	const table: TableSource = {
-		head: ['ID', 'Serial number', 'Category'],
-		body: tableMapperValues(testData, ['id', 'serialnum', 'category'])
+		head: [
+			'ID',
+			'Serial number',
+			'Category',
+			'Status',
+			'Person',
+			'Location',
+			'Department',
+			'Building',
+			'Room'
+		],
+		body: tableMapperValues(data.devices, [
+			'id',
+			'serial_number',
+			'category',
+			'status',
+			'person',
+			'location',
+			'department',
+			'building',
+			'room'
+		])
 	};
 </script>
 
