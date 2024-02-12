@@ -1,1 +1,17 @@
-// place files you want to import through the `$lib` alias in this folder.
+enum status {
+    InUse,
+    InStock,
+    HomeOffice,
+    Temporary,
+    Lost,
+    ToBeRepaired,
+    Return,
+    Sold,
+    Stolen,
+    AssignedLoanOffice,
+    Loaned,
+    Discarded,
+    Other,
+}
+
+export { status }

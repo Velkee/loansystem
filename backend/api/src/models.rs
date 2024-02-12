@@ -122,7 +122,7 @@ pub struct NewPerson<'a> {
     pub building: Option<&'a str>,
 }
 
-#[derive(Queryable, Identifiable, Associations, Selectable, Serialize, Deserialize)]
+#[derive(Queryable, Identifiable, Associations, Selectable, Serialize, Deserialize, Debug)]
 #[diesel(belongs_to(Category, foreign_key = category))]
 #[diesel(belongs_to(Person, foreign_key = person))]
 #[diesel(belongs_to(Location, foreign_key = location))]
