@@ -18,6 +18,8 @@ async fn list_devices() -> impl Responder {
         Err(_) => return internal_error().await,
     };
 
+    println!("{:#?}", results);
+
     HttpResponse::Ok().json(results)
 }
 
